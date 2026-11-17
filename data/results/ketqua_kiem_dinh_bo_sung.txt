@@ -1,0 +1,121 @@
+### kiem_dinh_mcnemar.py
+=== OA tung lan chia (bo MT) ===
+      n_test      RF    CART     SVM     GTB
+seed                                        
+1        461  0.7505  0.6161  0.7592  0.7505
+2        459  0.7756  0.6667  0.7908  0.7473
+3        445  0.7483  0.6787  0.7685  0.7528
+4        452  0.7345  0.6283  0.7500  0.7323
+5        412  0.7767  0.7039  0.7549  0.7985
+42       406  0.7562  0.6330  0.7586  0.7389
+
+=== McNemar chinh xac, RF so voi mo hinh con lai: Seed 42 (lan chia chinh cua bao cao) ===
+RF vs CART | RF dung & CART sai =  67 | RF sai & CART dung =  17 | p = 0.0000 | p Holm = 0.0000 | hieu OA(RF-CART) 95% theo khoi: +0.076 den +0.169
+RF vs SVM  | RF dung & SVM sai =  16 | RF sai & SVM dung =  17 | p = 1.0000 | p Holm = 1.0000 | hieu OA(RF-SVM) 95% theo khoi: -0.028 den +0.025
+RF vs GTB  | RF dung & GTB sai =  21 | RF sai & GTB dung =  14 | p = 0.3105 | p Holm = 0.6210 | hieu OA(RF-GTB) 95% theo khoi: -0.010 den +0.046
+
+=== McNemar chinh xac, RF so voi mo hinh con lai: Gop 6 lan chia (cac diem lap lai, chi tham khao) ===
+RF vs CART | RF dung & CART sai = 392 | RF sai & CART dung = 121 | p = 0.0000 | p Holm = 0.0000 | hieu OA(RF-CART) 95% theo khoi: +0.086 den +0.119
+RF vs SVM  | RF dung & SVM sai =  94 | RF sai & SVM dung = 113 | p = 0.2108 | p Holm = 0.4216 | hieu OA(RF-SVM) 95% theo khoi: -0.018 den +0.004
+RF vs GTB  | RF dung & GTB sai = 104 | RF sai & GTB dung =  94 | p = 0.5225 | p Holm = 0.5225 | hieu OA(RF-GTB) 95% theo khoi: -0.007 den +0.014
+
+=== Kiem dinh ghep cap tren 5 lan chia lap (seed 1 den 5), 4 mo hinh ===
+         RF   CART    SVM    GTB
+seed                            
+1     75.05  61.61  75.92  75.05
+2     77.56  66.67  79.08  74.73
+3     74.83  67.87  76.85  75.28
+4     73.45  62.83  75.00  73.23
+5     77.67  70.39  75.49  79.85
+Trung binh +- do lech chuan (diem): RF 75.71 +- 1.84; CART 65.87 +- 3.62; SVM 76.47 +- 1.61; GTB 75.63 +- 2.49
+t ghep cap CART - RF: chenh TB -9.84 diem, t = -8.10, p = 0.0013
+t ghep cap SVM  - RF: chenh TB +0.76 diem, t = 1.00, p = 0.3749
+t ghep cap GTB  - RF: chenh TB -0.08 diem, t = -0.10, p = 0.9221
+p da hieu chinh Holm (3 so sanh): [0.0038 0.7499 0.9221]
+Friedman 4 mo hinh: chi2 = 10.837, p = 0.0126
+Friedman 3 mo hinh khong tinh CART (RF, SVM, GTB): chi2 = 2.842, p = 0.2415
+
+Ghi chu: McNemar coi cac diem doc lap; diem trong cung khoi tuong quan khong gian nen p co the qua nho, can doc cung khoang tin cay bootstrap theo khoi.
+
+### so_sanh_thu_nghiem.py
+Seed 42 (lan chia chinh):
+                   OA  F1_XayDung  P_XayDung  R_XayDung  F1_DatTrong  P_DatTrong  R_DatTrong
+features                                                                                    
+MT              0.756       0.735      0.687      0.791        0.743       0.750       0.736
+MT_PLUS         0.768       0.746      0.725      0.767        0.778       0.764       0.792
+MT_IBI_EBBI_UI  0.754       0.770      0.713      0.837        0.734       0.752       0.717
+MT_TEXTURE      0.764       0.750      0.733      0.767        0.772       0.761       0.783
+
+Trung binh +- sd tren 5 lan lap (seed 1 den 5), kiem dinh t ghep cap so voi MT:
+- MT              | OA 0.757+-0.018 | F1 Xay dung 0.728+-0.033 | Precision Xay dung 0.720+-0.034 | Recall Xay dung 0.739+-0.063 | F1 Dat trong 0.745+-0.027 | Precision Dat trong 0.749+-0.040 | Recall Dat trong 0.741+-0.025
+- MT_PLUS         | OA 0.786+-0.018 (chenh +0.029, p=0.000) | F1 Xay dung 0.761+-0.031 (chenh +0.033, p=0.009) | Precision Xay dung 0.773+-0.039 (chenh +0.053, p=0.016) | Recall Xay dung 0.755+-0.076 (chenh +0.016, p=0.089) | F1 Dat trong 0.780+-0.029 (chenh +0.035, p=0.001) | Precision Dat trong 0.787+-0.048 (chenh +0.037, p=0.015) | Recall Dat trong 0.775+-0.029 (chenh +0.033, p=0.016)
+- MT_IBI_EBBI_UI  | OA 0.760+-0.018 (chenh +0.003, p=0.589) | F1 Xay dung 0.738+-0.038 (chenh +0.010, p=0.336) | Precision Xay dung 0.743+-0.038 (chenh +0.023, p=0.003) | Recall Xay dung 0.738+-0.072 (chenh -0.002, p=0.924) | F1 Dat trong 0.745+-0.018 (chenh -0.000, p=0.981) | Precision Dat trong 0.749+-0.033 (chenh -0.000, p=0.974) | Recall Dat trong 0.742+-0.033 (chenh +0.001, p=0.946)
+- MT_TEXTURE      | OA 0.787+-0.012 (chenh +0.030, p=0.001) | F1 Xay dung 0.750+-0.035 (chenh +0.023, p=0.087) | Precision Xay dung 0.753+-0.037 (chenh +0.033, p=0.042) | Recall Xay dung 0.753+-0.072 (chenh +0.014, p=0.269) | F1 Dat trong 0.785+-0.032 (chenh +0.040, p=0.008) | Precision Dat trong 0.791+-0.055 (chenh +0.041, p=0.022) | Recall Dat trong 0.781+-0.017 (chenh +0.039, p=0.005)
+
+Quy tac doc: chi coi la cai thien khi F1 tang >= 0.03 va p < 0.05 tren 5 lan lap, dong thoi OA khong giam. Neu khong, ghi la thu nghiem khong cai thien va neu huong khac (them Sentinel-1/2, mau thuc dia).
+
+
+### danh_gia_ngay_tham_chieu.py
+So diem co nhan hop le: 340, thieu gia tri dong: 0
+OA hieu chinh tat ca diem: 0.708 +- 0.065 | ty le dong y khong trong so: 0.579
+
+--- Do bien dong NDVI nua dau (T1-T2) va nua cuoi (T3-T4) mua kho, Sentinel-2 (anh nguoi gan nhan thay) ---
+Phan vi 25/50/75/90 cua |dNDVI|:  [0.028 0.081 0.207 0.414]
+Nguong 0.10 | on dinh n=191 dong y 0.597 | bien dong n=149 dong y 0.557 | Fisher p = 0.5069 | OA hieu chinh chi diem on dinh: 0.762 +- 0.085
+Nguong 0.15 | on dinh n=224 dong y 0.585 | bien dong n=116 dong y 0.569 | Fisher p = 0.8172 | OA hieu chinh chi diem on dinh: 0.760 +- 0.076
+Nguong 0.20 | on dinh n=251 dong y 0.598 | bien dong n= 89 dong y 0.528 | Fisher p = 0.2632 | OA hieu chinh chi diem on dinh: 0.762 +- 0.071
+Tuong quan Spearman giua muc bien dong va bat dong: rho = 0.057, p = 0.2939
+Ty le bat dong theo nhom phan vi (tu thap den cao):
+q
+Q1    0.412
+Q2    0.388
+Q3    0.412
+Q4    0.471
+
+--- Do bien dong NDVI nua dau (T1-T2) va nua cuoi (T3-T4) mua kho, Landsat (anh dung phan loai) ---
+Phan vi 25/50/75/90 cua |dNDVI|:  [0.028 0.068 0.155 0.281]
+Nguong 0.10 | on dinh n=207 dong y 0.585 | bien dong n=119 dong y 0.580 | Fisher p = 1.0000 | OA hieu chinh chi diem on dinh: 0.759 +- 0.072
+Nguong 0.15 | on dinh n=240 dong y 0.588 | bien dong n= 86 dong y 0.570 | Fisher p = 0.7997 | OA hieu chinh chi diem on dinh: 0.740 +- 0.074
+Nguong 0.20 | on dinh n=272 dong y 0.599 | bien dong n= 54 dong y 0.500 | Fisher p = 0.2266 | OA hieu chinh chi diem on dinh: 0.746 +- 0.068
+Tuong quan Spearman giua muc bien dong va bat dong: rho = 0.046, p = 0.4118
+Ty le bat dong theo nhom phan vi (tu thap den cao):
+q
+Q1    0.390
+Q2    0.370
+Q3    0.481
+Q4    0.427
+
+Bien dong NDVI giua mua kho va T9-T10/2026 (Landsat): trung vi 0.122; diem thay doi > 0.2: 100 (29.4%)
+
+Nhom bat dong lon nhat (ban do -> tham chieu):
+  Dat trong -> Thuc vat: 38 diem
+  Xay dung -> Thuc vat: 29 diem
+  Xay dung -> Dat trong: 22 diem
+  Nuoc -> Thuc vat: 18 diem
+  Thuc vat -> Dat trong: 15 diem
+
+### kappa_nguoi_gan_nhan.py
+So diem co nhan 2 hop le: 100 (loai 0 diem 9 Khong chac hoac thieu)
+
+Ma tran (hang = nhan 1, cot = nhan 2):
+           Nuoc  Thuc vat  Xay dung  Dat trong
+Nuoc         17         2         0          1
+Thuc vat      1        37         3          2
+Xay dung      0         0        12          0
+Dat trong     0         1         0         24
+
+Dong y tho = 0.900 | Cohen kappa = 0.858 (sai so chuan 0.042; khoang 95%: 0.775 den 0.942)
+Muc dong y theo Landis va Koch (1977): gan nhu hoan toan
+Nuoc      nhan 1:  20 | nhan 2:  18 | dong y  17
+Thuc vat  nhan 1:  43 | nhan 2:  40 | dong y  37
+Xay dung  nhan 1:  12 | nhan 2:  15 | dong y  12
+Dat trong nhan 1:  25 | nhan 2:  27 | dong y  24
+
+Dong y giua ban do va tung nguoi gan nhan tren cung 100 diem: nhan 1 = 0.610 | nhan 2 = 0.630
+
+Cac cap bat dong nhieu nhat (nhan 1 -> nhan 2):
+  Thuc vat -> Xay dung: 3
+  Nuoc -> Thuc vat: 2
+  Thuc vat -> Dat trong: 2
+  Nuoc -> Dat trong: 1
+  Thuc vat -> Nuoc: 1
