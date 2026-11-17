@@ -7,6 +7,12 @@
 
 Đồ án phân loại lớp phủ bề mặt tỉnh Tây Ninh sau sáp nhập (hợp nhất Tây Ninh và Long An, khoảng 855.494 ha) thành bốn lớp Nước, Thực vật, Xây dựng, Đất trống từ ảnh Landsat 8 và 9 năm 2026, bằng Google Earth Engine (GEE) và bốn thuật toán Random Forest (RF), CART, SVM, Gradient Tree Boosting (GTB). Bản đồ cuối được biên tập trong ArcMap 10.8.
 
+<p align="center">
+  <img src="docs/ban_do_lop_phu_tay_ninh.jpg" alt="Bản đồ phân loại lớp phủ bề mặt tỉnh Tây Ninh sau sáp nhập năm 2026" width="520">
+</p>
+
+*Bản đồ minh họa đã biên tập trong ArcMap, lấy từ kết quả chạy ngày 25/10/2026. Dữ liệu gốc là tệp GeoTIFF `data/output/TayNinh_LandCover_RF_MT_2026.tif` (mã lớp 0 Nước, 1 Thực vật, 2 Xây dựng, 3 Đất trống).*
+
 ## Kết quả chính
 
 | Nội dung | Giá trị |
